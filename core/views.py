@@ -8,6 +8,7 @@ def get_location(ip):
     url = f'https://geo.ipify.org/api/v2/country,city?apiKey={settings.GEO_IPY_KEY}&ipAddress={ip}'
     response = requests.get(url)
     data = response.json()
+    print(data)
 
     return data.get('city')
 
@@ -25,7 +26,7 @@ class Index(View):
         user_ip = request.META.get('REMOTE_ADDR', '')
         
         location = get_location(user_ip)
-        temperature = get_temperature()
+        temperature = get_temperature(location)
         
         res = {
             "client_ip": user_ip,
