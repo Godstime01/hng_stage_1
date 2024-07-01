@@ -38,7 +38,7 @@ class Index(View):
         res = {
             "client_ip": user_ip,
             "location": location,
-            "greeting": f"Hello, {query}! The temperature is {temperature} degrees Celsius in {location}."
+            "greeting": f"Hello, {query}! The temperature is {temperature} degrees Celcius in {location}."
         }
         
         return JsonResponse(res)
