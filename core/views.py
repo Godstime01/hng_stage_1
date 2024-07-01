@@ -10,7 +10,7 @@ def get_location(ip):
     data = response.json()
     print(data)
 
-    return data.get('city')
+    return data.get('location')["city"]
 
 # Function to fetch temperature using OpenWeatherMap API
 def get_temperature(city="New york"):
