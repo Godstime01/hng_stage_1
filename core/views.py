@@ -4,7 +4,7 @@ from rest_framework.views import View
 from django.http import JsonResponse
 from django.conf import settings
 
-def get_location(ip="129.205.113.176"):
+def get_location(ip):
     url = f'https://geo.ipify.org/api/v2/country,city?apiKey={settings.GEO_IPY_KEY}&ipAddress={ip}'
     response = requests.get(url)
     data = response.json()
@@ -17,13 +17,12 @@ def get_location(ip="129.205.113.176"):
 def get_temperature(city):
     print(city, "CITY")
     if city:
-
        url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={settings.OPENWEATHER_API_KEY}&units=metric'
     else:
         url = f'http://api.openweathermap.org/data/2.5/weather?q=new york&appid={settings.OPENWEATHER_API_KEY}&units=metric'
     response = requests.get(url)
     data = response.json()
-    print(data)
+    # print(data)
     temperature = data['main']['temp']
     return temperature
 
@@ -33,7 +32,7 @@ class Index(View):
         user_ip = request.META.get('REMOTE_ADDR', '')
         
         location = get_location(user_ip)
-        print(location)
+        # print(location)
         temperature = get_temperature(location)
         
         res = {
